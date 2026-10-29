@@ -59,7 +59,7 @@ export function CanopyBreeze({ image, active }: { image: RefObject<HTMLImageElem
     const photo = image.current;
     if (!surface || !photo) return;
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const gl = surface.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: true, depth: false, stencil: false });
+    const gl = surface.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: true, depth: false, stencil: false });
     // The accessible photo remains visible if WebGL is unavailable or fails.
     if (!gl) return;
     let frame = 0, elapsed = 0, previous = 0, lastPaint = 0;
@@ -145,12 +145,24 @@ export function CanopyBreeze({ image, active }: { image: RefObject<HTMLImageElem
         indexCount = indices.length;
         gl!.bindTexture(gl!.TEXTURE_2D, texture);
         gl!.pixelStorei(gl!.UNPACK_FLIP_Y_WEBGL, false);
-        gl!.pixelStorei(gl!.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+        // Match the browser compositor: filter colour already multiplied by alpha.
+        // The cutout has vivid RGB in nearly transparent pixels. Straight-alpha
+        // filtering/antialiasing can expose those colours around moving edges.
+        gl!.pixelStorei(gl!.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
         gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_S, gl!.CLAMP_TO_EDGE);
         gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_T, gl!.CLAMP_TO_EDGE);
         gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MIN_FILTER, gl!.LINEAR);
         gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MAG_FILTER, gl!.LINEAR);
-        gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.RGBA, gl!.RGBA, gl!.UNSIGNED_BYTE, photo!);
+        // Normalise through the browser's premultiplied 2D surface before upload,
+        // avoiding direct WebP-to-GPU alpha conversion differences on mobile.
+        // No pixel readback or persistent copy is made.
+        const source = document.createElement('canvas');
+        source.width = photo!.naturalWidth; source.height = photo!.naturalHeight;
+        const context = source.getContext('2d');
+        if (!context) throw new Error('Texture surface unavailable');
+        context.drawImage(photo!, 0, 0);
+        gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.RGBA, gl!.RGBA, gl!.UNSIGNED_BYTE, source);
+        source.width = 0; source.height = 0;
         gl!.uniform1i(gl!.getUniformLocation(program!, 'u_tree'), 0);
         time = gl!.getUniformLocation(program!, 'u_time');
         initialized = true;
