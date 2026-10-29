@@ -20,7 +20,7 @@ export default function Privacy() {
       <p>The Content Security Policy permits exact hashes for generated inline scripts and narrowly allows Google’s tag and analytics endpoints. It continues to block forms, frames, objects and unrestricted inline or evaluated scripts.</p>
       <h2>Public content only</h2>
       <p>The public profile name, profile links and owner-approved portraits are intentional. Private documents, résumé details, phone numbers, email addresses and private biography are excluded. Project and journal stories must not identify companies, people or clients through names or distinctive details. Design studies are labelled and do not claim delivered client engagements.</p>
-      <p>The animated tree and its controls do not collect or transmit data. The optional cardboard portrait is labelled as AI-assisted, with owner-authorised suggested print dimensions.</p>
+      <p>The animated tree does not collect or transmit data. The optional cardboard portrait is labelled as AI-assisted, with owner-authorised suggested print dimensions.</p>
       <h2>External links and hosting</h2>
       <p>External links open their respective services when you follow them, with referrer information suppressed. Those services apply their own privacy practices. GitHub Pages receives normal connection information and logs IP addresses for security, independently of your analytics choice. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" rel="noreferrer">the host’s explanation of data collection</a>.</p>
       <h2>A public review version</h2>
