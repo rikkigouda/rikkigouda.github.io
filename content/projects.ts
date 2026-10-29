@@ -1,0 +1,32 @@
+export const projects = [
+  {
+    slug: 'a-smaller-digital-footprint', kind: 'site' as const, category: 'Web & architecture', status: 'Built · public review',
+    title: 'A smaller digital footprint.', summary: 'A personal portfolio with a clear boundary between public work and private information.',
+    description: 'The design and implementation of this portfolio: a site that introduces the person, makes room for work, and gives ideas a home with optional consent-based analytics.',
+    role: 'Design, architecture and implementation of this site.', question: 'How much can a personal site do while asking for as little as possible?',
+    approach: ['Give the portfolio, profile and journal their own pages, with a consistent visual identity and direct navigation.', 'Generate static pages at build time. Keep fonts and assets local, and use public profile links instead of collecting messages.', 'Keep private source documents out of the project. Review visible content, metadata and generated files before any publication.'],
+    outcome: 'A working portfolio and journal, published with permission for review. Journal entries remain labelled as editorial drafts.',
+    boundary: 'This is the site you are viewing, not a client engagement. No employer, customer or private career details are disclosed. The tree is a generated visual, not a photograph of a real person, location or engagement.',
+    tags: ['Static delivery', 'Content boundaries', 'Accessible navigation'],
+  },
+  {
+    slug: 'a-decision-that-travels', kind: 'decision' as const, category: 'Architecture & communication', status: 'Design study',
+    title: 'A decision that travels.', summary: 'A compact decision record that keeps context, options and consequences together.',
+    description: 'A general architecture study: make the reasoning behind a decision understandable to someone who was not in the room.',
+    role: 'Authored study and reusable decision-record structure.', question: 'What should the next person know before they change the decision?',
+    approach: ['Start with one question and the constraints that matter. Separate what is known from what is still assumed.', 'Compare a small set of options against those constraints. Record the cost of each choice, including the option to do nothing.', 'State the decision, its consequences and the evidence that would justify revisiting it.'],
+    outcome: 'A practical structure for a short decision record: question, context, options, decision, consequences and review trigger.',
+    boundary: 'A general design exercise. It does not describe an organisation, a past engagement or a measured business result.',
+    tags: ['Decision records', 'Trade-offs', 'Shared context'],
+  },
+  {
+    slug: 'a-release-with-a-way-back', kind: 'release' as const, category: 'Delivery & reliability', status: 'Design study',
+    title: 'A release with a way back.', summary: 'A release playbook that gives verification and recovery a place in the plan.',
+    description: 'A general delivery study that follows a change from preparation through verification, release and recovery decisions.',
+    role: 'Authored study and release-review structure.', question: 'What would make the next change understandable, observable and reversible?',
+    approach: ['Define the intended change, its boundary and the evidence that will show whether it behaves as expected.', 'Establish a baseline, verify the candidate and describe the conditions for continuing or stopping.', 'Plan recovery before release, including the limits of rollback and the checks needed after returning to the previous state.'],
+    outcome: 'A reviewable sequence with explicit preparation, verification, release, observation and recovery steps.',
+    boundary: 'A general design exercise. No real infrastructure, operational incident or client system is represented.',
+    tags: ['Release planning', 'Verification', 'Recovery'],
+  },
+];

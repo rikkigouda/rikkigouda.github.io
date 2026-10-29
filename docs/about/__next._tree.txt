@@ -1,0 +1,5 @@
+:HL["/_next/static/css/4dc799406e9f9c23.css","style"]
+:HL["/rikki-portrait.webp","image",{"fetchPriority":"high"}]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"about","h":96,"c":"$Q2"}]]
+0:{"b":"Y_OUciyv8GcDZuRc8Bj6h","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

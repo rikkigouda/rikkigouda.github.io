@@ -1,5 +1,7 @@
-package-lock.json
 *.js.map
+/.next/
+/out/
+*.tsbuildinfo
 
 # dependencies
 /node_modules

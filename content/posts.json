@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "privacy-is-a-design-choice",
+    "title": "Privacy is a design choice.",
+    "category": "Opinion",
+    "summary": "A personal website can be useful without turning its visitors into a dataset.",
+    "blocks": [
+      {
+        "kind": "p",
+        "text": "A personal site starts with a simple purpose: give an idea a place to live. Yet it is easy to add features that change the relationship with the reader. A counter becomes analytics. A profile becomes an embedded feed. A conversation becomes a form that needs a database, retention rules and someone to look after it."
+      },
+      {
+        "kind": "p",
+        "text": "Each addition may be useful. Each also creates another reason to collect, transmit or keep information. Before adding one, there is a useful question: what does the reader gain?"
+      },
+      {
+        "kind": "h2",
+        "text": "Begin with less to protect."
+      },
+      {
+        "kind": "p",
+        "text": "A page of text can do a surprising amount. It can explain a point of view, show a design, link to public work and invite a conversation through a channel that already exists. None of those tasks inherently requires an account or a history of what the reader clicked."
+      },
+      {
+        "kind": "p",
+        "text": "Keeping the implementation small also makes its behaviour easier to inspect. It is much simpler to explain a handful of local files than a chain of integrations whose defaults can change."
+      },
+      {
+        "kind": "h2",
+        "text": "Tell the lesson, protect the context."
+      },
+      {
+        "kind": "p",
+        "text": "Writing about engineering introduces another boundary. An interesting story does not automatically become appropriate to publish. A removed name can leave a recognisable combination of dates, numbers, systems and events."
+      },
+      {
+        "kind": "p",
+        "text": "A safer starting point is the transferable idea. Explain the trade-off, the question or the pattern. Leave out the distinctive context that the reader does not need. If removing the context removes the entire value of the story, it may belong in a private conversation."
+      },
+      {
+        "kind": "h2",
+        "text": "Be precise about the promise."
+      },
+      {
+        "kind": "p",
+        "text": "A site without tracking still needs a host to deliver its pages. External links still lead to services with their own policies. Privacy deserves a clear description of those boundaries, rather than a promise that cannot be kept."
+      },
+      {
+        "kind": "p",
+        "text": "The design goal is modest: publish only what is intended, ask for only what is needed, and make the boundaries easy to understand."
+      }
+    ]
+  },
+  {
+    "slug": "before-the-diagram",
+    "title": "Before the diagram, ask a better question.",
+    "category": "Engineering",
+    "summary": "A diagram becomes useful when everyone knows which decision it is helping them make.",
+    "blocks": [
+      {
+        "kind": "p",
+        "text": "A box is easy to draw. Agreeing what belongs inside it takes longer. Architecture conversations can fill a whiteboard before anyone has said what needs to change, who needs it, or how the group will recognise a useful result."
+      },
+      {
+        "kind": "p",
+        "text": "Drawing can help people think. But a neat picture can also make an uncertain idea look settled. Before improving the picture, improve the question behind it."
+      },
+      {
+        "kind": "h2",
+        "text": "Give the discussion a decision."
+      },
+      {
+        "kind": "p",
+        "text": "“What should the architecture be?” leaves almost everything open. A more useful question names a decision and a constraint: which boundary would let a component change independently, while keeping a particular interaction understandable?"
+      },
+      {
+        "kind": "p",
+        "text": "The wording matters less than the specificity. People can compare options when they understand the trade-off. Without that, they may be answering different questions with the same vocabulary."
+      },
+      {
+        "kind": "h2",
+        "text": "Make uncertainty visible."
+      },
+      {
+        "kind": "p",
+        "text": "A diagram can distinguish what is known from what is assumed. A connection might be observed, proposed or still under investigation. Those are different kinds of information and deserve different treatment."
+      },
+      {
+        "kind": "p",
+        "text": "Keeping assumptions visible creates a path to evidence. It makes it possible to ask what would change the decision, and which small investigation would be worth doing next."
+      },
+      {
+        "kind": "h2",
+        "text": "Leave something another person can use."
+      },
+      {
+        "kind": "p",
+        "text": "The most useful output may be a short decision note alongside the diagram: the question, the options, the constraint that mattered and the reason for the choice."
+      },
+      {
+        "kind": "p",
+        "text": "That note gives the next person a way to understand the decision without recreating the meeting. It also leaves room for the decision to change when its assumptions do."
+      },
+      {
+        "kind": "p",
+        "text": "A clear picture helps. A clear question gives it a purpose."
+      }
+    ]
+  }
+]
