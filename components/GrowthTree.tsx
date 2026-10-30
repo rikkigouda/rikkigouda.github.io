@@ -29,6 +29,6 @@ export function GrowthTree() {
         <span className="natural-leaf-cycle drift-three"><span className="natural-loose-leaf" /></span>
       </div>
     </div>
-    <figcaption><span>Strong roots. Shared growth.</span><p>A little support makes room for what comes next.</p></figcaption>
+    <figcaption><span>Room to grow.</span></figcaption>
   </figure>;
 }

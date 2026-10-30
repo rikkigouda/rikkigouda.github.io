@@ -1,5 +1,5 @@
-:HL["/_next/static/css/17e18fac93d313a3.css","style"]
+:HL["/_next/static/css/9e1ffd8bcba94d5d.css","style"]
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"slug","t":"d","k":"a-release-with-a-way-back","s":[]},"h":65632,"c":"$Q3"}]]
 1:[["children",{"s":"work","h":131168,"c":"$Q2"}]]
-0:{"b":"z0ywmiFus2du-Im6OIxZS","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"AtDrhPnWzGffvjPJYj6-g","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}

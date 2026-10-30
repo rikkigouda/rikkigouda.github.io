@@ -423,3 +423,29 @@ em { font-weight: 400; }
 .analytics-actions { display: flex; flex-direction: column; gap: 10px; min-width: 170px; }
 .analytics-actions button { border: 1px solid var(--line); border-radius: 4px; padding: 11px 15px; font: 14px/1.4 'Segoe UI',Arial,sans-serif; background: var(--panel); color: var(--ink); cursor: pointer; }
 @media (max-width: 600px) { .analytics-choices { max-height: calc(100svh - 32px); overflow: auto; flex-direction: column; align-items: stretch; padding: 20px; gap: 18px; } .analytics-actions { flex-direction: row; flex-wrap: wrap; } .analytics-actions button { flex: 1 1 130px; } .footer>div:last-child { flex-wrap: wrap; } }
+
+/* A broader personal space, with the work as one part of it. */
+.perspective-preview { padding-bottom: 64px; }
+.perspective-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.perspective-card { position: relative; display: block; padding: 25px 27px 42px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--sheet); }
+.perspective-card:hover { background: var(--panel); }
+.perspective-card>.eyebrow { color: var(--muted); }
+.perspective-card h3 { margin-top: 24px; font: 27px/1.2 Georgia,serif; letter-spacing: -.5px; }
+.perspective-card p { margin-top: 12px; font-size: 15px; color: var(--muted); max-width: 29ch; }
+.perspective-arrow { position: absolute; right: 22px; bottom: 15px; color: var(--blue); }
+.perspective-intro>p:not(.eyebrow) { max-width: 640px; }
+.perspective-index { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.perspective-index a { border: 1px solid var(--line); padding: 10px 15px; font-size: 14px; }
+.perspective-index a:hover { background: var(--panel); }
+.perspective-index a span { margin-left: 12px; color: var(--blue); }
+.perspective-story { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px,6vw,90px); padding-block: 48px; border-top: 1px solid var(--line); }
+.perspective-story h2 { font: clamp(30px,3.2vw,43px)/1.15 Georgia,serif; letter-spacing: -1px; margin-top: 16px; }
+.perspective-question { font: italic 23px/1.4 Georgia,serif; color: var(--blue); margin-top: 24px; max-width: 25ch; }
+.perspective-story .prose { margin: 0; max-width: 650px; }
+@media (max-width: 1100px) and (min-width: 901px) { .site-header-inner { gap: 16px; grid-template-columns: 1fr auto auto; } .site-header nav a { padding-inline: 10px; } }
+@media (max-width: 760px) { .perspective-cards { grid-template-columns: repeat(2,minmax(0,1fr)); } .perspective-card { padding-inline: 20px; } .perspective-story { grid-template-columns: 1fr; gap: 25px; padding-block: 36px; } }
+@media (max-width: 480px) { .site-header nav { gap: 2px; } .site-header nav a { padding-inline: 4px; font-size: 13px; } .perspective-cards { grid-template-columns: 1fr; } .perspective-card { padding: 23px 24px 32px; } .perspective-card h3 { margin-top: 14px; } .perspective-preview { padding-bottom: 42px; } }
+
+.practice-heading { font: 19px/1.4 Georgia,serif; margin-top: 25px; }
+.perspective-story .prose ul { padding-left: 20px; margin-top: 12px; }
+.perspective-story .prose li { margin-block: 9px; }

@@ -1,4 +1,4 @@
-:HL["/_next/static/css/17e18fac93d313a3.css","style"]
+:HL["/_next/static/css/9e1ffd8bcba94d5d.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"journal","h":96,"c":"$Q2"}]]
-0:{"b":"z0ywmiFus2du-Im6OIxZS","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"AtDrhPnWzGffvjPJYj6-g","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

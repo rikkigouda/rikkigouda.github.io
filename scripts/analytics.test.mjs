@@ -41,7 +41,7 @@ test('consent loads one tag, suppresses advertising and sanitises every page fie
   const commands = m.browser.dataLayer.map(args => Array.from(args));
   const config = commands.find(args => args[0] === 'config')[2];
   assert.equal(config.page_location, 'https://rikki.kiwi/about/');
-  assert.equal(config.page_referrer, ''); assert.equal(config.page_title, 'About — Rikki G');
+  assert.equal(config.page_referrer, ''); assert.equal(config.page_title, 'About | Rikki G');
   assert.equal(config.allow_google_signals, false); assert.equal(config.allow_ad_personalization_signals, false);
   assert.equal(config.cookie_expires, 0); assert.equal(config.cookie_domain, 'none');
   assert.equal(commands[0][2].analytics_storage, 'denied');
@@ -55,7 +55,7 @@ test('remembered consent works across full static-page navigation', () => {
 test('unknown routes never disclose path, title, query or fragment', () => {
   const m = mock({ pathname: '/private-token/' }); createAnalyticsController(m.browser, id).choose('granted');
   const config = m.browser.dataLayer.map(args => Array.from(args)).find(args => args[0] === 'config')[2];
-  assert.equal(config.page_location, 'https://rikki.kiwi/404/'); assert.equal(config.page_title, 'Page not found — Rikki G');
+  assert.equal(config.page_location, 'https://rikki.kiwi/404/'); assert.equal(config.page_title, 'Page not found | Rikki G');
 });
 test('localhost, lookalike hosts, HTTP, privacy signals and blocked storage fail safely', () => {
   for (const options of [{ hostname: 'localhost' }, { hostname: '127.0.0.1' }, { hostname: 'rikki.kiwi.example.com' }, { protocol: 'http:' }, { privacy: true }, { dnt: true }]) {

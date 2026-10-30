@@ -1,13 +1,13 @@
 export type AnalyticsChoice = 'granted' | 'denied';
 export const consentKey = 'rikki.analytics-consent';
 export const pageTitles: Record<string, string> = {
-  '/': 'Helping people grow — Rikki G', '/about/': 'About — Rikki G',
-  '/work/': 'Portfolio — Rikki G', '/journal/': 'Journal — Rikki G', '/privacy/': 'Privacy — Rikki G',
-  '/work/a-smaller-digital-footprint/': 'A smaller digital footprint — Rikki G',
-  '/work/a-decision-that-travels/': 'A decision that travels — Rikki G',
-  '/work/a-release-with-a-way-back/': 'A release with a way back — Rikki G',
-  '/journal/privacy-is-a-design-choice/': 'Privacy is a design choice — Rikki G',
-  '/journal/before-the-diagram/': 'Before the diagram, ask a better question — Rikki G',
+  '/': 'Helping people grow | Rikki G', '/about/': 'About | Rikki G',
+  '/perspectives/': 'Perspectives | Rikki G', '/work/': 'Work & studies | Rikki G', '/journal/': 'Journal | Rikki G', '/privacy/': 'Privacy | Rikki G',
+  '/work/a-smaller-digital-footprint/': 'A smaller digital footprint | Rikki G',
+  '/work/a-decision-that-travels/': 'A decision that travels | Rikki G',
+  '/work/a-release-with-a-way-back/': 'A release with a way back | Rikki G',
+  '/journal/privacy-is-a-design-choice/': 'Privacy is a design choice | Rikki G',
+  '/journal/before-the-diagram/': 'Before the diagram, ask a better question | Rikki G',
 };
 
 type AnalyticsWindow = Window & {
@@ -52,7 +52,7 @@ export function createAnalyticsController(browser: AnalyticsWindow, measurementI
     const path = Object.hasOwn(pageTitles, browser.location.pathname) ? browser.location.pathname : '/404/';
     tag('config', measurementId, {
       page_location: `https://rikki.kiwi${path}`, page_path: path,
-      page_title: pageTitles[path] ?? 'Page not found — Rikki G', page_referrer: '',
+      page_title: pageTitles[path] ?? 'Page not found | Rikki G', page_referrer: '',
       send_page_view: true, allow_google_signals: false, allow_ad_personalization_signals: false,
       cookie_prefix: 'rikki', cookie_domain: 'none', cookie_expires: 0,
       cookie_flags: 'SameSite=Lax;Secure',

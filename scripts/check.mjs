@@ -11,7 +11,7 @@ async function files(directory) {
   return (await Promise.all(entries.map(entry => entry.isDirectory() ? files(resolve(directory, entry.name)) : resolve(directory, entry.name)))).flat();
 }
 const all = await files(output);
-const routes = ['/', '/work/', '/about/', '/journal/', '/privacy/', '/work/a-smaller-digital-footprint/', '/work/a-decision-that-travels/', '/work/a-release-with-a-way-back/', '/journal/privacy-is-a-design-choice/', '/journal/before-the-diagram/'];
+const routes = ['/', '/work/', '/about/', '/perspectives/', '/journal/', '/privacy/', '/work/a-smaller-digital-footprint/', '/work/a-decision-that-travels/', '/work/a-release-with-a-way-back/', '/journal/privacy-is-a-design-choice/', '/journal/before-the-diagram/'];
 const titles = new Set();
 let links = 0, scripts = 0;
 for (const route of routes) {
@@ -39,7 +39,10 @@ for (const route of routes) {
     assert(policy.includes(`'sha256-${createHash('sha256').update(script).digest('base64')}'`), `Inline script hash missing: ${route}`);
     scripts++;
   }
+  if (route.startsWith('/journal/')) assert(!/Editorial draft|Draft for review|Drafts for review|Draft notes/.test(html), `Approved journal must not carry draft labels: ${route}`);
   const page = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
+  assert(!/linkedin\.com\/feed\/update|Related writing on LinkedIn/.test(html), `No source-post links in site copy: ${route}`);
+  assert(!page.includes('\u2014'), `No em dashes in page text or metadata: ${route}`);
   assert(!/<(?:form|iframe|embed|object)\b|\b(?:mailto|tel):|\bon\w+=/i.test(page), 'No forms, embeds or private contact schemes');
   assert(!/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i.test(page), 'Do not expose email addresses');
   assert(!/\b(?:\+?64|0)[\s()-]*2[\d\s()-]{7,12}\b/.test(page), 'Do not expose phone numbers');
@@ -92,4 +95,8 @@ assert(all.includes(resolve(output, '.nojekyll')), 'Static Pages marker required
 if (site.customDomain) assert.equal((await readFile(resolve(output, 'CNAME'), 'utf8')).trim(), site.customDomain, 'Custom domain must survive export');
 else assert(!all.includes(resolve(output, 'CNAME')), 'Review deployment must not redirect to an unconfigured domain');
 assert(!all.includes(resolve(output, 'privacy.html')), 'Remove stale prototype pages');
+const perspectivesHtml = await readFile(resolve(output, 'perspectives/index.html'), 'utf8');
+for (const id of ['fatherhood', 'engineering', 'trading', 'learning', 'values', 'good']) assert(perspectivesHtml.includes(`id="${id}"`), `Perspective missing: ${id}`);
+assert(perspectivesHtml.includes('Draft for review'), 'New personal copy remains a review draft');
+assert(!/Pause tree animation|Replay the tree animation|tree-controls/.test(await readFile(resolve(output, 'index.html'), 'utf8')), 'Keep removed tree controls out of the site');
 console.log(`Passed: ${routes.length} routes, ${links} links/assets, ${scripts} exact inline-script hashes, metadata and privacy restrictions.`);

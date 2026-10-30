@@ -5,8 +5,8 @@ import site from '@/content/site.json';
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   robots: site.review ? { index: false, follow: false } : undefined,
-  title: { default: 'Rikki G — Engineering & architecture', template: '%s — Rikki G' },
-  description: 'A personal portfolio of engineering, architecture and ideas. Clear thinking, useful work and a small public footprint.',
+  title: { default: 'Rikki G | Helping people grow', template: '%s | Rikki G' },
+  description: 'A personal space for fatherhood, engineering, markets, learning and the questions behind a good decision.',
   referrer: 'no-referrer', icons: { icon: '/favicon.svg' },
 };
 export const viewport: Viewport = { themeColor: [{ media: '(prefers-color-scheme: light)', color: '#f3f6fa' }, { media: '(prefers-color-scheme: dark)', color: '#102238' }] };
