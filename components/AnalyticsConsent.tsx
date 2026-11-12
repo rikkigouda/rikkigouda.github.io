@@ -32,7 +32,7 @@ export function AnalyticsConsent() {
   if (!open) return null;
   return <section className="analytics-choices" aria-labelledby="analytics-heading" role="region">
     <div><h2 id="analytics-heading">Your analytics choice</h2>
-      {availability === 'local' ? <p>Analytics is always off in this local preview. No Google tag is loaded and no analytics choice is stored here.</p>
+      {availability === 'local' ? <p>Analytics is off at this address. No Google tag is loaded and no analytics choice is stored here.</p>
         : availability === 'privacy' ? <p>Your browser’s privacy signal is respected. Google Analytics is off and its tag is not loaded.</p>
           : <><p>Optional Google Analytics helps me understand visits to this site. It starts only if you allow it. Advertising features are off.</p><p className="analytics-detail">Your choice lasts for this tab; analytics cookies last for the browser session. Current choice: {choice === 'granted' ? 'allowed' : choice === 'denied' ? 'declined' : 'not set'}.</p></>}
       <a href="/privacy/">Read the privacy details ↗</a>

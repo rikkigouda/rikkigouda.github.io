@@ -96,3 +96,7 @@ The owner confirmed enterprise production experience with LLM-based systems, cus
 ## Publication approval, 30 October 2026
 
 The owner approved the final conversational wording of both journal entries, requested removal of journal draft labels and authorised publishing the current site to the existing GitHub Pages review address. Earlier local-only notes above describe development history. Journal listings, articles, metadata and the homepage teaser no longer identify those entries as drafts. Perspectives remains marked for review. Family privacy and labelled hypothetical examples are preserved. No domain/DNS changes are part of this release; analytics remains disabled on github.io and review pages request no indexing.
+
+## Custom-domain launch, 12 November 2026
+
+The owner authorised rikki.kiwi activation, review-wording cleanup and live consent verification. content/site.json now uses https://rikki.kiwi and exports docs/CNAME. review remains true to retain noindex until the owner completes phone review. Historical notes about the github.io review address above are superseded by this launch configuration. Only the site-related DNS records and the GitHub ownership TXT record are in scope; unrelated services must remain intact.

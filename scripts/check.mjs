@@ -97,6 +97,6 @@ else assert(!all.includes(resolve(output, 'CNAME')), 'Review deployment must not
 assert(!all.includes(resolve(output, 'privacy.html')), 'Remove stale prototype pages');
 const perspectivesHtml = await readFile(resolve(output, 'perspectives/index.html'), 'utf8');
 for (const id of ['fatherhood', 'engineering', 'trading', 'learning', 'values', 'good']) assert(perspectivesHtml.includes(`id="${id}"`), `Perspective missing: ${id}`);
-assert(perspectivesHtml.includes('Draft for review'), 'New personal copy remains a review draft');
+assert(!/Draft for review|Editorial draft/.test(perspectivesHtml), 'Remove approved review wording');
 assert(!/Pause tree animation|Replay the tree animation|tree-controls/.test(await readFile(resolve(output, 'index.html'), 'utf8')), 'Keep removed tree controls out of the site');
 console.log(`Passed: ${routes.length} routes, ${links} links/assets, ${scripts} exact inline-script hashes, metadata and privacy restrictions.`);

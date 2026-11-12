@@ -23,8 +23,8 @@ export default function Privacy() {
       <p>The animated tree does not collect or transmit data. The optional cardboard portrait is an AI-assisted image, with suggested print dimensions.</p>
       <h2>External links and hosting</h2>
       <p>External links open their respective services when you follow them, with referrer information suppressed. Those services apply their own privacy practices. GitHub Pages receives normal connection information and logs IP addresses for security, independently of your analytics choice. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" rel="noreferrer">the host’s explanation of data collection</a>.</p>
-      <h2>A public review version</h2>
-      <p>This version is published with the owner’s permission for review. Analytics stays off on the github.io review address; it is configured only for the intended rikki.kiwi domain.</p>
+      <h2>Search visibility</h2>
+      <p>These pages currently ask search engines not to index them. They remain publicly accessible. Analytics is available only on rikki.kiwi and www.rikki.kiwi, and starts only after you allow it.</p>
     </div>
   </article></Frame>;
 }

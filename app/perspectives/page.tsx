@@ -10,7 +10,7 @@ export const metadata = {
 export default function Perspectives() {
   return <Frame current="/perspectives/">
     <section className="page-intro perspective-intro">
-      <p className="eyebrow">Perspectives / Draft for review</p>
+      <p className="eyebrow">Perspectives</p>
       <h1>How I look<br /><em>at things.</em></h1>
       <p>Some views I hold, some questions I am working through, and a few ways to put them to use.</p>
       <nav className="perspective-index" aria-label="Explore perspectives">{perspectives.map(item => <a href={`#${item.id}`} key={item.id}>{item.title} <span aria-hidden="true">↓</span></a>)}</nav>

@@ -1,6 +1,6 @@
 export const projects = [
   {
-    slug: 'a-smaller-digital-footprint', kind: 'site' as const, category: 'Web & architecture', status: 'Built · public review',
+    slug: 'a-smaller-digital-footprint', kind: 'site' as const, category: 'Web & architecture', status: 'Built',
     title: 'A smaller digital footprint.', summary: 'A personal portfolio with a clear boundary between public work and private information.',
     description: 'The design and implementation of this portfolio: a site that introduces the person, makes room for work, and gives ideas a home with optional consent-based analytics.',
     role: 'Design, architecture and implementation of this site.', question: 'How much can a personal site do while asking for as little as possible?',
