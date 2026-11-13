@@ -8,6 +8,7 @@ export const pageTitles: Record<string, string> = {
   '/work/a-release-with-a-way-back/': 'A release with a way back | Rikki G',
   '/journal/privacy-is-a-design-choice/': 'Privacy is a design choice | Rikki G',
   '/journal/before-the-diagram/': 'Before the diagram, ask a better question | Rikki G',
+  '/journal/when-the-man-becomes-bigger-than-the-machine/': 'When the man becomes bigger than the machine | Rikki G',
 };
 
 type AnalyticsWindow = Window & {

@@ -6,12 +6,15 @@ import { createHash } from 'node:crypto';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = resolve(root, 'docs');
 const site = JSON.parse(await readFile(resolve(root, 'content/site.json'), 'utf8'));
+const investigation = JSON.parse(await readFile(resolve(root, 'content/nvidia-investigation.json'), 'utf8'));
+const investigationRoute = `/journal/${investigation.article.slug}/`;
+const investigationSources = new Set(investigation.sources.map(s => new URL(s.url).href));
 async function files(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   return (await Promise.all(entries.map(entry => entry.isDirectory() ? files(resolve(directory, entry.name)) : resolve(directory, entry.name)))).flat();
 }
 const all = await files(output);
-const routes = ['/', '/work/', '/about/', '/perspectives/', '/journal/', '/privacy/', '/work/a-smaller-digital-footprint/', '/work/a-decision-that-travels/', '/work/a-release-with-a-way-back/', '/journal/privacy-is-a-design-choice/', '/journal/before-the-diagram/'];
+const routes = ['/', '/work/', '/about/', '/perspectives/', '/journal/', '/privacy/', '/work/a-smaller-digital-footprint/', '/work/a-decision-that-travels/', '/work/a-release-with-a-way-back/', '/journal/privacy-is-a-design-choice/', '/journal/before-the-diagram/', investigationRoute];
 const titles = new Set();
 let links = 0, scripts = 0;
 for (const route of routes) {
@@ -39,7 +42,7 @@ for (const route of routes) {
     assert(policy.includes(`'sha256-${createHash('sha256').update(script).digest('base64')}'`), `Inline script hash missing: ${route}`);
     scripts++;
   }
-  if (route.startsWith('/journal/')) assert(!/Editorial draft|Draft for review|Drafts for review|Draft notes/.test(html), `Approved journal must not carry draft labels: ${route}`);
+  if (route.startsWith('/journal/')) assert(!/Editorial draft|Draft for review|Drafts for review|Draft notes|publication pending approval/.test(html), `Published journal must not carry draft labels: ${route}`);
   const page = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
   assert(!/linkedin\.com\/feed\/update|Related writing on LinkedIn/.test(html), `No source-post links in site copy: ${route}`);
   assert(!page.includes('\u2014'), `No em dashes in page text or metadata: ${route}`);
@@ -53,7 +56,7 @@ for (const route of routes) {
   for (const [, target] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     const url = new URL(target.replaceAll('&amp;', '&'), `https://local.test${route}`);
     if (url.hostname !== 'local.test') {
-      assert(['www.linkedin.com', 'github.com', 'docs.github.com', 'rikki.kiwi', new URL(site.url).hostname, 'policies.google.com'].includes(url.hostname), 'Unexpected outbound link');
+      assert(['www.linkedin.com', 'github.com', 'docs.github.com', 'rikki.kiwi', new URL(site.url).hostname, 'policies.google.com'].includes(url.hostname) || (route === investigationRoute && investigationSources.has(url.href)), `Unexpected outbound link: ${url.href}`);
       continue;
     }
     const pathname = decodeURIComponent(url.pathname);

@@ -7,7 +7,7 @@
     "build": "node scripts/build.mjs",
     "start": "node scripts/preview.mjs",
     "preview": "node scripts/preview.mjs",
-    "test": "node scripts/check.mjs && node --test scripts/analytics.test.mjs",
+    "test": "node scripts/check.mjs && node --test scripts/analytics.test.mjs scripts/investigation.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
