@@ -1,29 +1,32 @@
+import { Fragment } from 'react';
 import data from '@/content/nvidia-investigation.json';
 import site from '@/content/site.json';
 import { Frame } from './Frame';
-import { EvidenceExplorer, InvestigationTimeline, MarketChart, RelationshipGraph, ShareArticleLink } from './InvestigationTools';
+import { ShareArticleLink, RelationshipGraph, MarketChart } from './InvestigationTools';
 import { SourceReferences } from './SourceReferences';
-
+import { CondensedTimeline, SourcedFlowDiagram } from './InvestigationStory';
+import { NotebookEntryLink, ReadingProgress } from './InvestigationNavigation';
 export const investigationPath = `/journal/${data.article.slug}/`;
+export const notebookPath = `${investigationPath}notebook/`;
 export const investigationMetadata = {
-  title: data.article.title,
-  description: data.article.subtitle,
-  alternates: { canonical: investigationPath },
-  robots: site.review ? { index: false, follow: false } : undefined,
-  openGraph: { type: 'article' as const, title: data.article.title, description: data.article.subtitle, url: investigationPath, publishedTime: data.article.datePublished ?? undefined, modifiedTime: data.article.dateModified, authors: [data.article.author], images: [{ url: '/nvidia-investigation-preview.png', width: 1200, height: 630, alt: 'NVIDIA: decisions, dependencies and evidence. An investigation by Rikki G.' }] },
+  title: data.article.title, description: data.article.subtitle, alternates: { canonical: investigationPath }, robots: site.review ? { index: false, follow: false } : undefined,
+  openGraph: { type: 'article' as const, title: data.article.title, description: data.article.subtitle, url: investigationPath, publishedTime: data.article.datePublished, modifiedTime: data.article.dateModified, authors: [data.article.author], images: [{ url: '/nvidia-investigation-preview.png', width: 1200, height: 630, alt: 'NVIDIA: decisions, dependencies and evidence. An investigation by Rikki G.' }] },
   twitter: { card: 'summary_large_image' as const, title: data.article.title, description: data.article.subtitle, images: ['/nvidia-investigation-preview.png'] },
 };
-
+const formatDate = (date: string) => new Date(`${date}T12:00:00Z`).toLocaleDateString('en-NZ', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' });
 export function NvidiaArticle() {
   const { article } = data;
-  const structuredData = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.subtitle, author: { '@type': 'Person', name: article.author }, dateCreated: article.dateCreated, datePublished: article.datePublished, dateModified: article.dateModified, inLanguage: 'en-NZ', wordCount: article.wordCount, creativeWorkStatus: 'Published', mainEntityOfPage: `${site.url}${investigationPath}`, image: `${site.url}/nvidia-investigation-preview.png`, citation: data.sources.map(s => s.url) };
-  return <Frame current="/journal/"><article className="article investigation-article"><a className="text-link" href="/journal/">← Journal</a><p className="eyebrow article-category">Engineering / Industry</p><h1>{article.title}</h1><p className="article-lead">{article.subtitle}</p><div className="investigation-byline"><span>By {article.author}</span><span>Published <time dateTime={article.datePublished ?? undefined}>14 November 2026</time></span><span>Updated <time dateTime={article.dateModified}>14 November 2026</time></span><span>{article.readingMinutes} min read</span></div>
-    <aside className="investigation-disclosure" aria-label="Editorial disclosure"><p>{article.disclosure}</p></aside>
-    <nav className="investigation-toc" aria-label="Article contents"><h2>In this investigation</h2><ol>{article.sections.map(s => <li key={s.id}><a href={`#${s.id}`}>{s.title}</a></li>)}</ol><div><a href="#timeline">Timeline</a><a href="#relationships">Relationship map</a><a href="#market">Market data</a><a href="#evidence">Evidence explorer</a><a href="#references">Sources</a></div></nav>
-    <div className="investigation-reading">{article.sections.map(section => <section key={section.id} id={section.id} className="prose"><h2>{section.title}</h2>{section.paragraphs.map((p, i) => <p key={i}>{p.text}{p.sources.length > 0 && <> <SourceReferences ids={p.sources} /></>}</p>)}{section.id === 'prices-and-beneficiaries' && <MarketChart market={data.market} />}</section>)}</div>
-    <div className="investigation-appendices"><InvestigationTimeline events={data.timeline} /><RelationshipGraph edges={data.relationships} /><EvidenceExplorer claims={data.claims} contradictions={data.contradictions} questions={data.questions} />
-      <section id="references" className="investigation-tool investigation-sources" aria-labelledby="references-heading"><p className="eyebrow">The source record</p><h2 id="references-heading">References and their limits.</h2><p>Sources are linked directly. Syndicated copies are one reporting chain. A company statement establishes what the company said; an oversight letter establishes what lawmakers asked. Neither independently proves every underlying assertion. Undated pages were accessed on 14 November 2026.</p>{data.sources.map(s => <details key={s.id} id={`source-${s.id}`}><summary><span className="claim-id">{s.id}</span><span>{s.title}<span className="source-meta">{s.publisher} · {s.date || 'Undated / rolling'} · {s.status}</span></span></summary><div className="source-detail"><p><a href={s.url} rel="noreferrer">Read source ↗</a></p><p>{s.author ? `Author: ${s.author}. ` : 'Author not identified. '}{s.type}. Accessed {s.accessed}.</p><p><strong>Limitations:</strong> {s.limitation}</p><p><strong>Supporting claims:</strong> {s.claims.length ? s.claims.join(', ') : 'Timeline or relationship evidence.'}</p></div></details>)}</section>
-    </div><div className="investigation-end"><ShareArticleLink url={`${site.url}${investigationPath}`} /><a className="text-link" href="#main">Back to the beginning ↑</a></div>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
+  const numbers = Object.fromEntries(data.sources.map((s, i) => [s.id, i + 1]));
+  const currentIds = new Set([...article.sections.map(s => s.id), 'timeline', 'relationships', 'financial-dependencies', 'market', ...data.condensedTimelineIds.map(id => `event-${id}`)]);
+  const legacy = data.legacyAnchors.filter(id => !currentIds.has(id));
+  const citations = [...new Set(article.sections.flatMap(s => s.paragraphs.flatMap(p => p.sources)))];
+  const structuredData = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.subtitle, author: { '@type': 'Person', name: article.author }, dateCreated: article.dateCreated, datePublished: article.datePublished, dateModified: article.dateModified, inLanguage: 'en-NZ', wordCount: article.wordCount, creativeWorkStatus: article.status === 'published' ? 'Published' : 'Draft revision', mainEntityOfPage: `${site.url}${investigationPath}`, image: `${site.url}/nvidia-investigation-preview.png`, citation: data.sources.filter(s => citations.includes(s.id)).map(s => s.url) };
+  return <Frame current="/journal/"><article className="article investigation-article"><ReadingProgress /><a className="text-link" href="/journal/">← Journal</a><p className="eyebrow article-category">Engineering / Industry</p><h1>{article.title}</h1><p className="article-lead">{article.subtitle}</p><div className="investigation-byline"><span>By {article.author}</span><span>First published <time dateTime={article.datePublished}>{formatDate(article.datePublished)}</time></span><span>Revised <time dateTime={article.dateModified}>{formatDate(article.dateModified)}</time></span><span>{article.readingMinutes} min read</span></div>
+    {article.status !== 'published' && <p className="revision-notice">Local revision for review. The published article has not been updated.</p>}
+    <p className="investigation-disclosure-brief">{article.disclosure} <a href={`${notebookPath}#methodology`} target="_blank" rel="noreferrer">Open notebook (new tab)</a></p>
+    <nav className="investigation-toc" aria-label="Article contents"><h2>Five chapters</h2><ol>{article.sections.map(s => <li key={s.id}><a href={`#${s.id}`}>{s.title}</a></li>)}</ol></nav>
+    <div className="investigation-reading" id="article-reading">{article.sections.map(section => <section key={section.id} id={section.id} className="prose"><h2>{section.title}</h2>{section.paragraphs.map((p, i) => <Fragment key={i}><p>{p.text}{p.sources.length > 0 && <> <SourceReferences ids={p.sources} basePath={notebookPath} newTab numbers={numbers} /></>}</p>{p.claims.includes('EMC15') && <MarketChart market={data.market} sourcePath={notebookPath} />}</Fragment>)}{section.id === 'the-visible-crisis' && <CondensedTimeline />}{section.id === 'follow-the-chips' && <RelationshipGraph edges={data.relationships} initialGroup="corporate" initialFocus="Megaspeed" sourcePath={notebookPath} embedded />}{section.id === 'follow-the-money' && <SourcedFlowDiagram type="financial" />}</section>)}</div>
+    <aside className="notebook-gateway" aria-labelledby="notebook-heading">{legacy.map(id => <span key={id} id={id} className="legacy-anchor" />)}<h2 id="notebook-heading">Investigation Notebook</h2><p>The detailed chronology and relationship records, exact market data, source qualifications and research methods are in the evidence appendix. Links open in a new tab so you can keep your place in the article.</p><NotebookEntryLink path={notebookPath} anchors={data.legacyAnchors} /></aside>
+    <div className="investigation-end"><ShareArticleLink url={`${site.url}${investigationPath}`} /><a className="text-link" href="#main">Back to the beginning ↑</a></div><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
   </article></Frame>;
 }

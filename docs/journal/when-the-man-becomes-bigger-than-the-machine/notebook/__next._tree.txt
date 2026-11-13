@@ -1,0 +1,7 @@
+:HL["/_next/static/css/9e1ffd8bcba94d5d.css","style"]
+:HL["/_next/static/css/6329e409f861d216.css","style"]
+4:[["children",{"s":"__PAGE__","h":160}]]
+3:[["children",{"s":"notebook","h":96,"c":"$Q4"}]]
+2:[["children",{"s":"when-the-man-becomes-bigger-than-the-machine","h":96,"c":"$Q3"}]]
+1:[["children",{"s":"journal","h":96,"c":"$Q2"}]]
+0:{"b":"aNieWhbWASxpseBqwJ6Bx","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

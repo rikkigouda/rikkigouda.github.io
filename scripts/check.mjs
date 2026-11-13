@@ -8,13 +8,14 @@ const output = resolve(root, 'docs');
 const site = JSON.parse(await readFile(resolve(root, 'content/site.json'), 'utf8'));
 const investigation = JSON.parse(await readFile(resolve(root, 'content/nvidia-investigation.json'), 'utf8'));
 const investigationRoute = `/journal/${investigation.article.slug}/`;
+const notebookRoute = `${investigationRoute}notebook/`;
 const investigationSources = new Set(investigation.sources.map(s => new URL(s.url).href));
 async function files(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   return (await Promise.all(entries.map(entry => entry.isDirectory() ? files(resolve(directory, entry.name)) : resolve(directory, entry.name)))).flat();
 }
 const all = await files(output);
-const routes = ['/', '/work/', '/about/', '/perspectives/', '/journal/', '/privacy/', '/work/a-smaller-digital-footprint/', '/work/a-decision-that-travels/', '/work/a-release-with-a-way-back/', '/journal/privacy-is-a-design-choice/', '/journal/before-the-diagram/', investigationRoute];
+const routes = ['/', '/work/', '/about/', '/perspectives/', '/journal/', '/privacy/', '/work/a-smaller-digital-footprint/', '/work/a-decision-that-travels/', '/work/a-release-with-a-way-back/', '/journal/privacy-is-a-design-choice/', '/journal/before-the-diagram/', investigationRoute, notebookRoute];
 const titles = new Set();
 let links = 0, scripts = 0;
 for (const route of routes) {
@@ -56,7 +57,7 @@ for (const route of routes) {
   for (const [, target] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     const url = new URL(target.replaceAll('&amp;', '&'), `https://local.test${route}`);
     if (url.hostname !== 'local.test') {
-      assert(['www.linkedin.com', 'github.com', 'docs.github.com', 'rikki.kiwi', new URL(site.url).hostname, 'policies.google.com'].includes(url.hostname) || (route === investigationRoute && investigationSources.has(url.href)), `Unexpected outbound link: ${url.href}`);
+      assert(['www.linkedin.com', 'github.com', 'docs.github.com', 'rikki.kiwi', new URL(site.url).hostname, 'policies.google.com'].includes(url.hostname) || ([investigationRoute, notebookRoute].includes(route) && investigationSources.has(url.href)), `Unexpected outbound link: ${url.href}`);
       continue;
     }
     const pathname = decodeURIComponent(url.pathname);
