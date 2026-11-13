@@ -391,7 +391,7 @@
             "sources": []
           },
           {
-            "text": "The exposures also differ across projects. NVIDIA disclosed $36 billion of AI-cloud commitments in its July-quarter filing. It separately described August credit support capped at $105 billion for defined SB Energy/OpenAI lease and power obligations. The guarantees become effective in phases as leases commence, expected from fiscal 2029; specified tenant defaults trigger payment obligations. It is a separate arrangement from CoreWeave's capacity agreement.",
+            "text": "The exposures also differ across projects. NVIDIA disclosed $36 billion of AI-cloud commitments in its July-quarter filing. It separately described August credit support capped at $105 billion for defined SB Energy/OpenAI lease and power obligations. The guarantees become effective in phases as leases commence, expected from fiscal 2029; specified tenant defaults trigger payment obligations. It is a separate arrangement from CoreWeave's capacity agreement. The $105 billion is a cap on contingent guarantees under those terms, not money already spent. It should not be added to equity investments, procurement commitments or other exposures as though they were all cash outlays.",
             "claims": [
               "EMC02",
               "EMC03"
@@ -493,17 +493,22 @@
             "sources": []
           },
           {
-            "text": "My take is that strategically important AI infrastructure needs effective public oversight, and that oversight should itself be accountable. We need decisions grounded in evidence, with scrutiny extending to companies, their financial relationships and the governments setting the boundaries.",
+            "text": "I can value what NVIDIA's products have meant to me and still want that scrutiny.",
             "claims": [],
             "sources": []
           },
           {
-            "text": "I can value what NVIDIA's products have meant to me and still want that scrutiny. Connecting the dots is how I try to make sense of a story like this: follow the chips, the decisions and the money, then check what actually joins them.",
+            "text": "Follow the chips. Follow the decisions. Follow the money.",
             "claims": [],
             "sources": []
           },
           {
-            "text": "Some links are documented. Some are disputed. Some are missing. Putting them in one picture helps us see which decisions need scrutiny and what evidence would let us judge them fairly. That is the point of connecting the dots: making a complicated story clear enough for people to question the decisions shaping it.",
+            "text": "But don't mistake proximity for a connection, or suspicion for evidence.",
+            "claims": [],
+            "sources": []
+          },
+          {
+            "text": "That's what connecting the dots means to me.",
             "claims": [],
             "sources": []
           }

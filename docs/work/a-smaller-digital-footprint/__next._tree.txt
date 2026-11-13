@@ -2,4 +2,4 @@
 3:[["children",{"s":"__PAGE__","h":160}]]
 2:[["children",{"s":{"n":"slug","t":"d","k":"a-smaller-digital-footprint","s":[]},"h":65632,"c":"$Q3"}]]
 1:[["children",{"s":"work","h":131168,"c":"$Q2"}]]
-0:{"b":"aNieWhbWASxpseBqwJ6Bx","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"YZ8SRPITNps21NaaSVeJG","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
